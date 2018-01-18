@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="page" id="page">
+    <div data-role="header">
+		<h1>PayPal Checkout</h1>
+	</div>
+    <div data-role="main" class="ui-content">
+		 <br><br>
+    <div id="paypal-button"></div>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        var CREATE_PAYMENT_URL  = 'http://127.0.0.1:5000/payment';
+        var EXECUTE_PAYMENT_URL = 'http://127.0.0.1:5000/executePayment';
+
+        paypal.Button.render({
+
+            env: 'sandbox', // Or 'production'
+
+            commit: true, // Show a 'Pay Now' button
+
+            payment: function() {
+                return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+                    return data.paymentID;
+                });
+            },
+
+            onAuthorize: function(data) {
+                return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                    paymentID: data.paymentID,
+                    payerID:   data.payerID
+                }).then(function() {
+
+                    // The payment is complete!
+                    // You can now show a confirmation message to the customer
+                });
+            }
+
+        }, '#paypal-button');
+    </script>
+    </div>
+</div>
+</div>
+</body>
+</html>
