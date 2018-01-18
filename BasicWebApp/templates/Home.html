@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="page" id="page">
+    <div data-role="header">
+		<h1>Home Page</h1>
+	</div>
+    <div data-role="main" class="ui-content">
+   {% block body %}
+
+    {{user}} logged in
+
+{% endblock %}
+    </div>
+    <div data-role="footer" style="overflow:hidden;">
+    <div data-role="navbar">
+        <ul>
+            <li><a href='/Order' class="ui-btn-active">Order</a></li>
+            <li><a href="#">Search Business</a></li>
+            <li><a href="#">View Stats</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+</body>
+</html>
