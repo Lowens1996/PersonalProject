@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This page displays product categories</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="page" id="page">
+    <div data-role="header">
+        <a href="/UserLogin" class="ui-btn ui-btn-icon-right ui-icon-arrow-l">Back</a>
+		<h1>Order Page</h1>
+	</div>
+    <div data-role="main" class="ui-content">
+    <ul data-role="listview" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+         <li><a href='/Specials'>Specials</a></li>
+        <li><a href="/Draft">Draft</a></li>
+        <li><a href="#">Bottles</a></li>
+        <li><a href="#">Spirits</a></li>
+        <li><a href="#">Shots</a></li>
+        <li><a href="#">Minerals</a></li>
+    </ul>
+        <br><br>
+        <form  method="POST" action="/PreviewOrder">
+             <input type="submit" name="Submit" value="Submit">
+        </form>
+</div>
+</div>
+</body>
+</html>

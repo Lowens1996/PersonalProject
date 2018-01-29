@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="page" id="page">
+     <div data-role="header">
+       <a href="/Order" class="ui-btn ui-btn-icon-right ui-icon-arrow-l">Back</a>
+		<h1>Your Order</h1>
+	</div>
+    <div data-role="main" class="ui-content">
+         {% block body %}
+            {% set count = 0 %}
+            {% for item in products %}
+                <p>
+                {{item}}
+                    <br>
+                {{quantaties[count]}}
+                    <br>
+                {{prices[count]}}
+                {% set count = count + 1 %}
+                </p>
+            {% endfor %}
+            <p>Order total: {{total}}<p>
+        {% endblock %}
+        <br><br>
+        <div id="paypal-button"></div>
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+        <script>
+            paypal.Button.render({
+                env: 'sandbox', // 'sandbox' Or 'production',
+                client: {
+                    sandbox: '<sandbox id>',
+                    production: ''
+                },
+                locale: 'en_GB',
+                commit: true, // Show a 'Pay Now' button
+                payment: function(data, actions) {
+                    // Set up the payment here
+                    return actions.payment.create({
+                        payment: {
+                            transactions: [
+                                {
+                                    amount: { total: '1.00', currency: 'GBP' }
+                                }
+                            ]
+                        }
+                    });
+                },
+                onAuthorize: function(data, actions) {
+                    // Execute the payment here
+                    return actions.payment.execute().then(function(payment) {
+
+                        // The payment is complete!
+                        // You can now show a confirmation message to the customer
+                    });
+                }
+            }, '#paypal-button');
+        </script>
+    </div>
+</div>
+</body>
+</html>
