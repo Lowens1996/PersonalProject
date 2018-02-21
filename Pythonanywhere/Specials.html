@@ -1,0 +1,30 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="page" data-theme="b" id="page">
+    <div data-role="header" data-theme="b">
+       <a href="/Order" class="ui-btn ui-btn-icon-right ui-icon-arrow-l">Back</a>
+		<h1>Specials</h1>
+	</div>
+    <div data-role="main" class="ui-content">
+        <form method="POST" action="/PreviewOrder">
+            <fieldset data-role="controlgroup">
+              {% block body %}
+                {% for item in specialslist %}
+                 {{ item.product }}   £{{ item.price }}
+                <input type="number" name = "{{ item.product }}" value=0>
+                 <br>
+                {% endfor %}
+                {% endblock %}
+            </fieldset>
+            <br>
+            <input type="submit" value="Add Specials">
+        </form>
+</div>
+</div>
+</body>
+</html>

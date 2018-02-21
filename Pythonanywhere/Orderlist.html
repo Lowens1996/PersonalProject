@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="page" data-theme="b" id="page">
+     <div data-role="header" data-theme="b">
+       <a href="/Order" class="ui-btn ui-btn-icon-right ui-icon-arrow-l">Back</a>
+		<h1>Your Order</h1>
+	</div>
+    <div data-role="main" class="ui-content">
+         {% block body %}
+            {% for item in products %}
+                <p>
+                {{ item }}
+                    <br>
+                {{ quantaties[loop.index0] }}
+                    <br>
+                {{ prices[loop.index0] }}
+                </p>
+            {% endfor %}
+            <p>Order total: {{total}}<p>
+            {% endblock %}
+        <br><br>
+        <div id="paypal-button"></div>
+        <br>
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+        <script>
+
+            var CREATE_PAYMENT_URL  = 'http://owens.pythonanywhere.com/payment';
+            var EXECUTE_PAYMENT_URL = 'http://owens.pythonanywhere.com/executePayment';
+
+            paypal.Button.render({
+
+                env: 'sandbox', // Or 'sandbox'
+
+                commit: true, // Show a 'Pay Now' button
+
+                payment: function() {
+                    return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+                        return data.paymentID;
+                    });
+                },
+
+                onAuthorize: function(data) {
+                    return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                        paymentID: data.paymentID,
+                        payerID:   data.payerID
+                    }).then(function() {
+                             this.document.location.href = 'http://owens.pythonanywhere.com/waiting'
+                    });
+                }
+
+            }, '#paypal-button');
+        </script>
+    </div>
+</div>
+</body>
+</html>
