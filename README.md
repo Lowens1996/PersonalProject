@@ -12,3 +12,5 @@ Design Doc: https://docs.google.com/document/d/17uiI6D-upzANHkjDoTFzzim_WyDxFbUq
 Technical Doc: https://docs.google.com/document/d/1pqSYQhWYmBkFas1wjPoM3rp3_6vnfgQsZXHguLTTbr0/edit?usp=sharing
 
 Project Rreport:https://docs.google.com/document/d/1rW9fcruCqljQzaePsHA2hXoBhWFo1O2sLGiQK-ERb40/edit?usp=sharing
+
+Note: This is an unfished application which I am currently still developing and looking to improve. All documentation which is available above was submitted for my end of year project in college meaning the documentation will not include new iterations of the application since it's submission. 
